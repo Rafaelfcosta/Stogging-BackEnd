@@ -1,4 +1,4 @@
-package stogging;
+package br.univali.stogging.dominio;
 
 import java.util.Date;
 
