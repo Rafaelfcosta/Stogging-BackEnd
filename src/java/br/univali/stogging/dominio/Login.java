@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import sun.security.util.Password;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Rafael
@@ -14,9 +14,10 @@ import sun.security.util.Password;
  */
 @Entity
 @SequenceGenerator(name = "seq_login", allocationSize = 1)
+@XmlRootElement
 public class Login implements Serializable {
 
-    private Password senha;
+    private String senha;
     private String username;
     
     @Id
@@ -27,16 +28,16 @@ public class Login implements Serializable {
 
     }
 
-    public Login(Password senha, String username) {
+    public Login(String senha, String username) {
         this.senha = senha;
         this.username = username;
     }
 
-    public Password getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public void setSenha(Password senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 

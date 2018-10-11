@@ -4,11 +4,13 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -16,11 +18,13 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity
 @SequenceGenerator(name = "seq_usuario", allocationSize = 1)
+@XmlRootElement
 public class Usuario implements Serializable {
 
     @Column(nullable = false)
     private String email;
     
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
     
     @OneToOne(cascade = CascadeType.PERSIST)
