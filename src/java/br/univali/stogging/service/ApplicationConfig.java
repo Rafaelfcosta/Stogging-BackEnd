@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(br.univali.stogging.service.EnderecoFacadeREST.class);
+        resources.add(br.univali.stogging.service.JogoFacadeREST.class);
         resources.add(br.univali.stogging.service.LoginFacadeREST.class);
         resources.add(br.univali.stogging.service.UsuarioFacadeREST.class);
     }
