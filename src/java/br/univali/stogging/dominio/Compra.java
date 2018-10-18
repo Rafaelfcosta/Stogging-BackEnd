@@ -1,18 +1,44 @@
 package br.univali.stogging.dominio;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Rafael
  * @version 1.0
  */
-public class Compra {
+@Entity
+@SequenceGenerator(name = "seq_compra", allocationSize = 1)
+@XmlRootElement
+public class Compra implements Serializable {
 
     private String chave;
+    
+    @Temporal(TemporalType.DATE)
     private Date data;
-    private String vendedor;
+       
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Anuncio anuncio;
+    
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Pagamento pagamento;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_compra")
+    private Long id;
+    @ManyToOne
+    private Cliente cliente;
 
     public Compra() {
 
@@ -21,7 +47,6 @@ public class Compra {
     public Compra(String chave, Date data, Anuncio anuncio, Pagamento pagamento) {
         this.chave = chave;
         this.data = data;
-        this.vendedor = anuncio.getCriador().getLogin().getUsername();
         this.anuncio = anuncio;
         this.pagamento = pagamento;
     }
@@ -42,14 +67,6 @@ public class Compra {
         this.data = data;
     }
 
-    public String getVendedor() {
-        return vendedor;
-    }
-
-    public void setVendedor(String vendedor) {
-        this.vendedor = vendedor;
-    }
-
     public Anuncio getAnuncio() {
         return anuncio;
     }
@@ -64,6 +81,14 @@ public class Compra {
 
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }

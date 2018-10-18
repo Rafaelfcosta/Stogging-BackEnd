@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
  * @author Rafael
  */
 @Stateless
-@Path("endereco")
+@Path("br.univali.stogging.dominio.endereco")
 public class EnderecoFacadeREST extends AbstractFacade<Endereco> {
 
     @PersistenceContext(unitName = "Stogging-BackEndPU")
@@ -37,7 +37,7 @@ public class EnderecoFacadeREST extends AbstractFacade<Endereco> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Endereco entity) {
         super.create(entity);
     }
@@ -64,7 +64,7 @@ public class EnderecoFacadeREST extends AbstractFacade<Endereco> {
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Endereco> findAll() {
         return super.findAll();
     }

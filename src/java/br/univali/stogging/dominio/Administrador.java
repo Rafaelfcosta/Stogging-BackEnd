@@ -1,9 +1,14 @@
 package br.univali.stogging.dominio;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 /**
  * @author Rafael
  * @version 1.0
  */
+
+
 public class Administrador extends Cliente {
     
     private enum Permissoes {
@@ -11,6 +16,7 @@ public class Administrador extends Cliente {
 	ADMIN
     }
     
+    @Enumerated(EnumType.STRING)
     private Permissoes permissoes;
 
     public Administrador() {

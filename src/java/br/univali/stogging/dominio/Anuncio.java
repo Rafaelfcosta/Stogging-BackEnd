@@ -1,21 +1,54 @@
 package br.univali.stogging.dominio;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Rafael
  * @version 1.0
  */
-public class Anuncio {
+@Entity
+@SequenceGenerator(name = "seq_anuncio", allocationSize = 1)
+@XmlRootElement
+public class Anuncio implements Serializable {
 
     private String chave;
+    
+    @Temporal(TemporalType.TIMESTAMP)
     private Date criacao;
+    
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Usuario criador;
+    
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Jogo jogo;
+    
+    @Enumerated(EnumType.STRING)
     private Plataformas plataforma;
+    
     private double preco;
+    
+    @Id
+    @GeneratedValue(generator = "seq_anuncio", strategy = GenerationType.SEQUENCE)
+    private Long id;
+    @ManyToOne
+    private Cliente cliente;
 
-    private enum Plataformas {
+    public enum Plataformas {
 	STEAM,
 	BATTLENET,
 	ORIGIN,
@@ -83,6 +116,14 @@ public class Anuncio {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     

@@ -1,20 +1,35 @@
 package br.univali.stogging.dominio;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Rafael
  * @version 1.0
  */
+@Entity
+@XmlRootElement
+//@DiscriminatorValue(value = "cliente")
 public class Cliente extends Usuario {
 
-    private List<Anuncio> anuncios;
-    private List<Compra> compras;
+    @OneToMany(mappedBy = "cliente")
+    private List<Anuncio> anuncios = new ArrayList<>();
+    @OneToMany(mappedBy = "cliente")
+    private List<Compra> compras = new ArrayList<>();
 
     public Cliente() {
 
     }
 
+    public Cliente(String email, Endereco endereco, Login login, String nome) {
+        super(email, endereco, login, nome);
+    }
+    
+    
     public List<Anuncio> getAnuncios() {
         return anuncios;
     }

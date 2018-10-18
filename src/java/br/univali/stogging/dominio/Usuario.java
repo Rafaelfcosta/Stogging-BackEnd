@@ -3,14 +3,16 @@ package br.univali.stogging.dominio;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  *
  * @author Rafael
@@ -18,14 +20,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @SequenceGenerator(name = "seq_usuario", allocationSize = 1)
 @XmlRootElement
-public class Usuario implements Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_usuario")
+public abstract class Usuario implements Serializable {
 
     @Column(nullable = false)
     private String email;
     
     @OneToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
-    
+
     @OneToOne(cascade = CascadeType.PERSIST)
     private Login login;
     
@@ -47,14 +51,6 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
     
-    public void criarAnuncio() {
-
-    }
-
-    public void deletarAnuncio() {
-
-    }
-
     public Login getLogin() {
         return login;
     }

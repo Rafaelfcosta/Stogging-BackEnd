@@ -5,6 +5,9 @@
  */
 package br.univali.stogging.service;
 
+import br.univali.stogging.dominio.Cliente;
+import br.univali.stogging.dominio.Endereco;
+import br.univali.stogging.dominio.Login;
 import br.univali.stogging.dominio.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -37,7 +40,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Usuario entity) {
         super.create(entity);
     }
@@ -64,7 +67,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Usuario> findAll() {
         return super.findAll();
     }

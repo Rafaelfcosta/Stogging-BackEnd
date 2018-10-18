@@ -5,6 +5,8 @@
  */
 package br.univali.stogging.service;
 
+import br.univali.stogging.dominio.Cliente;
+import br.univali.stogging.dominio.Endereco;
 import br.univali.stogging.dominio.Login;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -19,33 +21,57 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author Rafael
  */
 @Stateless
-@Path("br.univali.stogging.dominio.login")
-public class LoginFacadeREST extends AbstractFacade<Login> {
+@Path("cliente")
+public class ClienteFacadeREST extends AbstractFacade<Cliente> {
 
     @PersistenceContext(unitName = "Stogging-BackEndPU")
     private EntityManager em;
 
-    public LoginFacadeREST() {
-        super(Login.class);
+    public ClienteFacadeREST() {
+        super(Cliente.class);
     }
+    
+    
+    @GET()
+    @Path("mock/{id}/login")
+    public Response mock(@PathParam("id") Long id){
+        //Cliente cliente = new Cliente("ze@mane.com", new Endereco("itajai", "sc"), new Login("123456", "zemane"), "ze mane");
+        Cliente cliente = this.find(id);
+        
+        
+        //cliente.comprar(new Compra("123", Calendar.getInstance().getTime(), new Anuncio("123", Calendar.getInstance().getTime(), this.find(40), new Jogo, cliente, 0), pagamento));
+        //this.edit(cliente);
+        //this.create(cliente);
+        return Response.ok(cliente, MediaType.APPLICATION_JSON).build();
+    }
+    
+    @GET()
+    @Path("mock")
+    public Response mockdata(){
+        Cliente cliente = new Cliente("ze@mane.com", new Endereco("itajai", "sc"), new Login("123456", "zemane"), "ze mane");
+        this.create(cliente);
+        return Response.ok().build();
+    }
+    
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Login entity) {
+    public void create(Cliente entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, Login entity) {
+    public void edit(@PathParam("id") Long id, Cliente entity) {
         super.edit(entity);
     }
 
@@ -58,21 +84,21 @@ public class LoginFacadeREST extends AbstractFacade<Login> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Login find(@PathParam("id") Long id) {
+    public Cliente find(@PathParam("id") Long id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Login> findAll() {
+    public List<Cliente> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Login> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Cliente> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

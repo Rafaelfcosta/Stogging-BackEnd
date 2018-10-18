@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author rafae
+ * @author Rafael
  */
 @Stateless
 @Path("jogo")

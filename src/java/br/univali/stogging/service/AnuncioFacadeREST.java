@@ -5,7 +5,8 @@
  */
 package br.univali.stogging.service;
 
-import br.univali.stogging.dominio.Login;
+import br.univali.stogging.dominio.Anuncio;
+import java.util.Calendar;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,33 +20,42 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author Rafael
  */
 @Stateless
-@Path("br.univali.stogging.dominio.login")
-public class LoginFacadeREST extends AbstractFacade<Login> {
+@Path("anuncio")
+public class AnuncioFacadeREST extends AbstractFacade<Anuncio> {
 
     @PersistenceContext(unitName = "Stogging-BackEndPU")
     private EntityManager em;
 
-    public LoginFacadeREST() {
-        super(Login.class);
+    public AnuncioFacadeREST() {
+        super(Anuncio.class);
+    }
+    
+    @GET()
+    @Path("mock")
+    public Response mockdata(){
+        Anuncio anuncio = new Anuncio("ABCDEFGHIJKLMNOPQRTUVWXYZ", Calendar.getInstance().getTime(), null, null, Anuncio.Plataformas.STEAM, 999);
+        this.create(anuncio);
+        return Response.ok().build();
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Login entity) {
+    public void create(Anuncio entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, Login entity) {
+    public void edit(@PathParam("id") Long id, Anuncio entity) {
         super.edit(entity);
     }
 
@@ -58,21 +68,21 @@ public class LoginFacadeREST extends AbstractFacade<Login> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Login find(@PathParam("id") Long id) {
+    public Anuncio find(@PathParam("id") Long id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Login> findAll() {
+    public List<Anuncio> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Login> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Anuncio> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

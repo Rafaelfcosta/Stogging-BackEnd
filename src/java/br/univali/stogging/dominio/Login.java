@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -17,7 +18,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Login implements Serializable {
 
+    @Transient
     private String senha;
+    
     private String username;
     
     @Id
