@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(br.univali.stogging.service.AdministradorFacadeREST.class);
         resources.add(br.univali.stogging.service.AnuncioFacadeREST.class);
         resources.add(br.univali.stogging.service.ClienteFacadeREST.class);
         resources.add(br.univali.stogging.service.CompraFacadeREST.class);

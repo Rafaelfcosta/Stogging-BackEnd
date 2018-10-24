@@ -3,9 +3,9 @@ package br.univali.stogging.dominio;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Rafael
@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-//@DiscriminatorValue(value = "cliente")
 public class Cliente extends Usuario {
 
     @OneToMany(mappedBy = "cliente")
@@ -30,6 +29,7 @@ public class Cliente extends Usuario {
     }
     
     
+    @XmlTransient
     public List<Anuncio> getAnuncios() {
         return anuncios;
     }
@@ -38,6 +38,7 @@ public class Cliente extends Usuario {
         this.anuncios = anuncios;
     }
 
+    @XmlTransient
     public List<Compra> getCompras() {
         return compras;
     }

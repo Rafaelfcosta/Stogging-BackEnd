@@ -1,17 +1,19 @@
 package br.univali.stogging.dominio;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Rafael
  * @version 1.0
  */
-
-
+@Entity
+@XmlRootElement
 public class Administrador extends Cliente {
     
-    private enum Permissoes {
+    public enum Permissoes {
 	MOD,
 	ADMIN
     }
