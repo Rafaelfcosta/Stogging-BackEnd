@@ -6,6 +6,8 @@
 package br.univali.stogging.service;
 
 import br.univali.stogging.dominio.Administrador;
+import br.univali.stogging.dominio.Endereco;
+import br.univali.stogging.dominio.Login;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,6 +21,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -26,6 +29,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path("administrador")
+@Produces(MediaType.APPLICATION_JSON)
 public class AdministradorFacadeREST extends AbstractFacade<Administrador> {
 
     @PersistenceContext(unitName = "Stogging-BackEndPU")
@@ -40,6 +44,15 @@ public class AdministradorFacadeREST extends AbstractFacade<Administrador> {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Administrador entity) {
         super.create(entity);
+    }
+    
+    @GET
+    @Path("/mock")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response mock(){
+        Administrador administrador = new Administrador(Administrador.Permissoes.ADMIN, "ze@mane.com", new Endereco("itajai", "sc"), new Login("123456", "zemane"), "ze mane");
+        super.create(administrador);
+        return Response.ok().build();
     }
 
     @PUT

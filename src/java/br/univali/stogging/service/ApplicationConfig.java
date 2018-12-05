@@ -33,6 +33,7 @@ public class ApplicationConfig extends Application {
         resources.add(br.univali.stogging.service.AnuncioFacadeREST.class);
         resources.add(br.univali.stogging.service.ClienteFacadeREST.class);
         resources.add(br.univali.stogging.service.CompraFacadeREST.class);
+        resources.add(br.univali.stogging.service.CorsFilter.class);
         resources.add(br.univali.stogging.service.EnderecoFacadeREST.class);
         resources.add(br.univali.stogging.service.JogoFacadeREST.class);
         resources.add(br.univali.stogging.service.LoginFacadeREST.class);

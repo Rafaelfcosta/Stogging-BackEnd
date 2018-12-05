@@ -25,6 +25,11 @@ public class Administrador extends Cliente {
 
     }
 
+    public Administrador(Permissoes permissoes, String email, Endereco endereco, Login login, String nome) {
+        super(email, endereco, login, nome);
+        this.permissoes = permissoes;
+    }
+
     public Administrador(Permissoes permissoes) {
         this.permissoes = permissoes;
     } 
