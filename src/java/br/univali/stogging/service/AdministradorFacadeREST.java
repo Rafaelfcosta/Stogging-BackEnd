@@ -50,7 +50,7 @@ public class AdministradorFacadeREST extends AbstractFacade<Administrador> {
     @Path("/mock")
     @Produces({MediaType.APPLICATION_JSON})
     public Response mock(){
-        Administrador administrador = new Administrador(Administrador.Permissoes.ADMIN, "ze@mane.com", new Endereco("itajai", "sc"), new Login("123456", "zemane"), "ze mane");
+        Administrador administrador = new Administrador(Administrador.Permissoes.ADMIN, "admin@exemple.com", new Endereco("itajai", "sc"), new Login("123456", "AdminUser"), "Administrator");
         super.create(administrador);
         return Response.ok().build();
     }

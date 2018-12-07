@@ -5,7 +5,6 @@
  */
 package br.univali.stogging.service;
 
-import br.univali.stogging.dominio.Anuncio;
 import br.univali.stogging.dominio.Compra;
 import java.util.Calendar;
 import java.util.List;

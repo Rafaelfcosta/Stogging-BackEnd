@@ -55,7 +55,7 @@ public class ClienteFacadeREST extends AbstractFacade<Cliente> {
     @GET()
     @Path("mock")
     public Response mockdata(){
-        Cliente cliente = new Cliente("ze@mane.com", new Endereco("itajai", "sc"), new Login("123456", "zemane"), "ze mane");
+        Cliente cliente = new Cliente("usuario@teste.com", new Endereco("itajai", "sc"), new Login("123456", "usuario"), "Usuario teste");
         this.create(cliente);
         return Response.ok().build();
     }
