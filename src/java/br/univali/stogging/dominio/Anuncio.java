@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -22,6 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @SequenceGenerator(name = "seq_anuncio", allocationSize = 1)
+@NamedQuery(name = "anunciosByGameId", query = "SELECT a FROM Anuncio a WHERE a.jogo.id = :gameId")
 @XmlRootElement
 public class Anuncio implements Serializable {
 

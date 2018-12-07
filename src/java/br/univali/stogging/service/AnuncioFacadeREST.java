@@ -6,11 +6,13 @@
 package br.univali.stogging.service;
 
 import br.univali.stogging.dominio.Anuncio;
+import br.univali.stogging.dominio.Jogo;
 import java.util.Calendar;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -93,6 +95,14 @@ public class AnuncioFacadeREST extends AbstractFacade<Anuncio> {
         return String.valueOf(super.count());
     }
 
+    @GET
+    @Path("findByGameId/{gameId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Anuncio> findAnuncioByGameId(@PathParam("gameId") int gameId) {
+        Query query = this.em.createNamedQuery("anunciosByGameId").setParameter("gameId", gameId);
+        return query.getResultList();
+    }
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
